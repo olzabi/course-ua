@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="56ca0bff-b36c-4324-8aaa-752d1f39e4c8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../COURSEUA_FRONT/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../COURSEUA_FRONT/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/course-ua.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/course-ua.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +46,7 @@
       <updated>1621441412678</updated>
       <workItem from="1621441414520" duration="687000" />
       <workItem from="1621442757126" duration="13656000" />
-      <workItem from="1621763985572" duration="7471000" />
+      <workItem from="1621763985572" duration="8978000" />
     </task>
     <servers />
   </component>

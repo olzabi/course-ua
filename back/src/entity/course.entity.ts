@@ -23,9 +23,3 @@ export class CourseEntity {
 
 
 }
-
-/*
-* rate_course —> рейтинг курса
-price_course —> цена курса
-link_corse —
-* */

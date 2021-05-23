@@ -2,24 +2,27 @@ import { Injectable } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
 
-import { ConfigService } from '../../shared/config/config.service';
-import { User } from '../user/interfaces/user.interface';
-import { UsersService } from '../user/user.service';
-import { JwtPayload } from './dto/jwt-payload.interface';
+import {UsersService} from "./user/user.service";
+import {UserDto} from "./user/dto/user.dto";
+import {JwtPayload} from "./interface/jwt-payload.interface";
 
 @Injectable()
 export class AuthService {
   private saltRounds = 10;
 
-  constructor(private userService: UsersService,
-              private config: ConfigService) { }
+  constructor(
+    private userService: UsersService,
+    // private config: ConfigService
+  ) {}
 
-  async signUp(user: User): Promise<User> {
+  async signUp(user: UserDto):
+    Promise<UserDto> {
     user.password = await bcrypt.hash(user.password, this.saltRounds);
     return await this.userService.create(user);
   }
 
-  async signIn(email: string, password: string): Promise<User> {
+  async signIn(email: string, password: string):
+    Promise<UserDto> {
     const user = await this.userService.findForAuth(email);
     if (!user) return null;
 
@@ -29,8 +32,10 @@ export class AuthService {
     return user;
   }
 
-  async createToken(user: User): Promise<string> {
+  async createToken(user: UserDto):
+    Promise<void> {
     const jwtPayload: JwtPayload = { id: user.id, email: user.email, role: user.role };
-    return await jwt.sign(jwtPayload, this.config.environment.secretKey, { expiresIn: "365d" });
+
+    await jwt.sign(jwtPayload, this.config.SecretKey, { expiresIn: "365d" });
   }
 }
