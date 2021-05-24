@@ -68,7 +68,8 @@ export class AuthController {
 
   @Get('refresh-token')
   @Roles("user", "premium", "admin")
-  async refreshToken(@AuthUser() user: JwtPayload): Promise<{ me: UserDto, token: string }> {
+  async refreshToken(@AuthUser() user: JwtPayload):
+    Promise<{ me: UserDto, token: string }> {
     let me = await this.usersService.findMe(user.id);
     let token = await this.authService.createToken(me);
 

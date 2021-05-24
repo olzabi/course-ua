@@ -6,6 +6,8 @@ import {UsersService} from "./user/user.service";
 import {UserDto} from "./user/dto/user.dto";
 import {JwtPayload} from "./interface/jwt-payload.interface";
 
+const secretKey = "THIS_STRING_IS_NOT_PANOGRAMA_KHEKHE#%!@*%43^";
+
 @Injectable()
 export class AuthService {
   private saltRounds = 10;
@@ -33,9 +35,9 @@ export class AuthService {
   }
 
   async createToken(user: UserDto):
-    Promise<void> {
+    Promise<string> {
     const jwtPayload: JwtPayload = { id: user.id, email: user.email, role: user.role };
 
-    await jwt.sign(jwtPayload, this.config.SecretKey, { expiresIn: "365d" });
+    return await jwt.sign(jwtPayload, secretKey, { expiresIn: "365d" });
   }
 }
