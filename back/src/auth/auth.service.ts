@@ -14,7 +14,6 @@ export class AuthService {
 
   constructor(
     private userService: UsersService,
-    // private config: ConfigService
   ) {}
 
   async signUp(user: UserDto):

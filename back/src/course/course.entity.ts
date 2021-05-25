@@ -1,10 +1,14 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn
+} from "typeorm";
 
 
 @Entity("course")
 export class CourseEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column()
   name: string;
@@ -21,5 +25,6 @@ export class CourseEntity {
   @Column()
   link: string;
 
-
+  @Column()
+  pictureUrl: string;
 }

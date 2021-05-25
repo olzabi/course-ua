@@ -1,13 +1,14 @@
 import {
   IsEmail,
-  IsNotEmpty
+  IsNotEmpty, IsString
 } from "class-validator";
 
 import { roles } from "../../../shared/roles.type";
 
 export class UserDto {
-
-  id?: number;
+  @IsNotEmpty()
+  @IsString()
+  id?: string;
 
   @IsNotEmpty()
   username?: string;

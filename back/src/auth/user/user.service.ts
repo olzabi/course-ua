@@ -23,13 +23,14 @@ export class UsersService {
     userEntity.role = "user";
 
     let userCreated = await this.userRepository.save(userEntity);
+
     delete userCreated.password;
     return userCreated;
   }
 
   async findForAuth(email: string):
     Promise<UserDto> {
-    return await this.userRepository
+    const queryByEmail = await this.userRepository
       .createQueryBuilder("user")
       .select([
         "user.password",
@@ -39,16 +40,18 @@ export class UsersService {
       ])
       .where("user.email = :email", { email: email })
       .getOne();
+    return queryByEmail;
   }
 
   async findOne(user: UserDto):
     Promise<UserDto> {
-    return await this.userRepository.findOne(user);
+    const getUser = await this.userRepository.findOne(user);
+    return getUser;
   }
 
   async findMe(userId):
     Promise<UserDto> {
-    return await this.userRepository
+    const getUserById = await this.userRepository
       .createQueryBuilder("user")
       .select([
         "user.id",
@@ -58,5 +61,6 @@ export class UsersService {
       ])
       .where("user.id = :userId", { userId })
       .getOne();
+    return getUserById;
   }
 }
