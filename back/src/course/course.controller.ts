@@ -2,7 +2,7 @@ import {
   Body,
   Controller,
   Delete,
-  Get,
+  Get, HttpCode,
   HttpStatus,
   NotFoundException,
   Param,
@@ -22,8 +22,9 @@ export class CourseController {
   ) {}
 
   @Post("/create")
+  @HttpCode(200)
   async createCourse(@Res() res, @Body() courseDto: CourseDto) {
-    const course = await this.courseService.createObj(courseDto);
+    const course = await this.courseService.createCourse(courseDto);
 
     return res.status(HttpStatus.OK).json({
       message: 'Streamer Successfully Created',
@@ -32,6 +33,7 @@ export class CourseController {
   }
 
   @Get("/courses")
+  @HttpCode(200)
   async getAll(@Res() res) {
     const courses = await this.courseService.getAll();
 
@@ -39,8 +41,9 @@ export class CourseController {
   }
 
   @Get("/:courseId")
+  @HttpCode(200)
   async getOne(@Res() res, @Param("courseId") courseId) {
-    const courseById = await this.courseService.getOneById(courseId);
+    const courseById = await this.courseService.getCourseById(courseId);
 
     if (!courseById) {
       throw new NotFoundException("The object does not exist!");
@@ -50,6 +53,7 @@ export class CourseController {
   }
 
   @Delete("/delete")
+  @HttpCode(200)
   async delete(@Res() res, @Query("courseId") courseId) {
     const deleteEntity = await this.courseService.deleteById(courseId);
 

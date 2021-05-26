@@ -29,16 +29,16 @@ export class CourseService {
       ])
       .getMany();
 
-    const courses = await this.courseRepo.find();
-
-    return courses;
-    // return query;
+    return query;
+    // const courses = await this.courseRepo.find();
+    // return courses;
   }
 
-  // get single obj
-  async getOneById(objId: string):
+  // get single course
+  async getCourseById(objId: string):
     Promise<CourseEntity> {
-    const course = await this.courseRepo.findOne({ where: { id: objId }});
+    // const course = await this.courseRepo.findOne({ where: { id: objId }});
+    // return course;
 
     const getCourseByQuery = await this.courseRepo
       .createQueryBuilder("course")
@@ -57,9 +57,10 @@ export class CourseService {
   }
 
   // post && update
-  async createObj(courseDto: CourseDto):
+  async createCourse(courseDto: CourseDto):
     Promise<CourseEntity> {
     let courseEntity: CourseEntity;
+
     if (!!courseEntity.id) {
       courseEntity = await this.courseRepo.findOne({ where: { id: courseDto.id }});
       if (!courseEntity) {
@@ -67,7 +68,6 @@ export class CourseService {
         courseEntity.id = courseDto.id;
       }
     }
-
     if (!courseEntity) {
       courseEntity = new CourseEntity();
     }
@@ -89,14 +89,15 @@ export class CourseService {
 
   async deleteById(courseId: string):
     Promise<DeleteResult> {
-    const deleteCond = await this.courseRepo.delete(courseId);
+    // const deleteCond = await this.courseRepo.delete(courseId);
+    // return deleteCond;
 
-    const query = await this.courseRepo
+    const deleteQuery = await this.courseRepo
       .createQueryBuilder("course")
       .delete()
       .from(CourseEntity)
       .where("id = :id", { id: courseId })
       .execute();
-    return query;
+    return deleteQuery;
   }
 }
