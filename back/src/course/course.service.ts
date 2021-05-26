@@ -59,18 +59,7 @@ export class CourseService {
   // post && update
   async createCourse(courseDto: CourseDto):
     Promise<CourseEntity> {
-    let courseEntity: CourseEntity;
-
-    if (!!courseEntity.id) {
-      courseEntity = await this.courseRepo.findOne({ where: { id: courseDto.id }});
-      if (!courseEntity) {
-        courseEntity = new CourseEntity();
-        courseEntity.id = courseDto.id;
-      }
-    }
-    if (!courseEntity) {
-      courseEntity = new CourseEntity();
-    }
+    let courseEntity: CourseEntity = new CourseEntity();
 
     try {
       courseEntity.name = courseDto.name;

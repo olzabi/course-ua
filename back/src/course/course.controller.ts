@@ -28,7 +28,7 @@ export class CourseController {
     const course = await this.courseService.createCourse(courseDto);
 
     return res.status(HttpStatus.OK).json({
-      message: 'Streamer Successfully Created',
+      message: 'Course Successfully Created',
       course,
     });
   }
