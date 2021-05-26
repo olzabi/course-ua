@@ -13,6 +13,7 @@ import {
 
 import {CourseService} from "./course.service";
 import {CourseDto} from "./dto/course.dto";
+import {ApiBody, ApiProperty, ApiResponse} from "@nestjs/swagger";
 
 
 @Controller("course")
@@ -42,6 +43,8 @@ export class CourseController {
 
   @Get("/:courseId")
   @HttpCode(200)
+  @ApiBody({ type: [CourseDto]})
+  @ApiResponse({ status: 200, description: "Takes object by given ID"})
   async getOne(@Res() res, @Param("courseId") courseId) {
     const courseById = await this.courseService.getCourseById(courseId);
 
