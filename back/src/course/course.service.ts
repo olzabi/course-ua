@@ -13,7 +13,7 @@ export class CourseService {
     private readonly courseRepo: Repository<CourseEntity>,
   ) {}
 
-  // get all
+
   // Promise<courseResponse> {
   async getAll():
     Promise<CourseEntity[]> {
@@ -50,18 +50,19 @@ export class CourseService {
         "course.rate",
         "course.pictureUrl",
       ])
-      .where("course.id = :courseId", { objId })
+      .where("course.id = :id", { id: objId })
       .getOne();
 
     return getCourseByQuery;
   }
 
-  // post && update
+
   async createCourse(courseDto: CourseDto):
     Promise<CourseEntity> {
     let courseEntity: CourseEntity = new CourseEntity();
 
     try {
+
       courseEntity.name = courseDto.name;
       courseEntity.description = courseDto.description;
       courseEntity.link = courseDto.link;
@@ -77,7 +78,7 @@ export class CourseService {
   }
 
   async deleteById(courseId: string):
-    Promise<DeleteResult> {
+    Promise<any> {
     // const deleteCond = await this.courseRepo.delete(courseId);
     // return deleteCond;
 

@@ -6,7 +6,7 @@ import {
   HttpCode,
   HttpStatus,
   NotFoundException,
-  Param,
+  Param, ParseUUIDPipe,
   Post,
   Query,
   Res
@@ -14,14 +14,17 @@ import {
 
 import {
   ApiBody,
+  ApiOperation,
+  ApiParam,
   ApiProperty,
-  ApiResponse
+  ApiResponse,
+  ApiTags
 } from "@nestjs/swagger";
 
 import {CourseService} from "./course.service";
 import {CourseDto} from "./dto/course.dto";
 
-
+@ApiTags("course")
 @Controller("course")
 export class CourseController {
   constructor(
@@ -30,6 +33,7 @@ export class CourseController {
 
   @Post("/create")
   @HttpCode(200)
+  @ApiOperation({ summary: "create object"})
   async createCourse(@Res() res, @Body() courseDto: CourseDto) {
     const course = await this.courseService.createCourse(courseDto);
 
@@ -41,7 +45,14 @@ export class CourseController {
 
   @Get("/courses")
   @HttpCode(200)
-  async getAll(@Res() res) {
+  @ApiOperation({ summary: "find all objects"})
+  @ApiResponse({
+    status: 200,
+    description: "The function select all object of course.entity and returns the array of objects.",
+    type: CourseDto
+  })
+  async getAll(@Res() res):
+    Promise<CourseDto[]> {
     const courses = await this.courseService.getAll();
 
     return res.status(HttpStatus.OK).json(courses);
@@ -49,9 +60,14 @@ export class CourseController {
 
   @Get("/:courseId")
   @HttpCode(200)
-  @ApiBody({ type: [CourseDto]})
-  @ApiResponse({ status: 200, description: "Takes object by given ID"})
-  async getOne(@Res() res, @Param("courseId") courseId) {
+  @ApiOperation({ summary: "find object"})
+  @ApiResponse({
+    status: 200,
+    description: "Takes object by given ID",
+    type: [CourseDto]
+  })
+  async getOne(@Res() res, @Param("courseId", new ParseUUIDPipe()) courseId: string):
+    Promise<CourseDto> {
     const courseById = await this.courseService.getCourseById(courseId);
 
     if (!courseById) {
@@ -63,7 +79,9 @@ export class CourseController {
 
   @Delete("/delete")
   @HttpCode(200)
-  async delete(@Res() res, @Query("courseId") courseId) {
+  @ApiOperation({ summary: "Delete the object."})
+  @ApiResponse({ status: 200, description: "Successfully deleted."})
+  async delete(@Res() res, @Query("courseId") courseId: string) {
     const deleteEntity = await this.courseService.deleteById(courseId);
 
     if (!deleteEntity) {

@@ -9,7 +9,7 @@ import { roles } from "../../shared/roles.type";
 
 @Entity("user")
 export class UserEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()

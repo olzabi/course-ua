@@ -7,7 +7,7 @@ import {
 
 @Entity("course")
 export class CourseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
