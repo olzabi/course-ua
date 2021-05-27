@@ -1,6 +1,7 @@
 import {
   IsEmail,
-  IsNotEmpty, IsString
+  IsNotEmpty,
+  IsString
 } from "class-validator";
 
 import { roles } from "../../../shared/roles.type";

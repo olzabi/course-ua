@@ -2,7 +2,8 @@ import {
   Body,
   Controller,
   Delete,
-  Get, HttpCode,
+  Get,
+  HttpCode,
   HttpStatus,
   NotFoundException,
   Param,
@@ -11,9 +12,14 @@ import {
   Res
 } from "@nestjs/common";
 
+import {
+  ApiBody,
+  ApiProperty,
+  ApiResponse
+} from "@nestjs/swagger";
+
 import {CourseService} from "./course.service";
 import {CourseDto} from "./dto/course.dto";
-import {ApiBody, ApiProperty, ApiResponse} from "@nestjs/swagger";
 
 
 @Controller("course")
