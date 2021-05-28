@@ -77,6 +77,18 @@ export class CourseController {
     return res.status(HttpStatus.OK).json(courseById);
   }
 
+  @HttpCode(200)
+  @ApiOperation({ summary: "update the object"})
+  @ApiResponse({ status: 200, description: "Successfully updated"})
+  async update(@Res() res, @Param("courseId", new ParseUUIDPipe()) courseId: string, courseDto: CourseDto) {
+    const updateCourse = await this.courseService.updateCourse(courseId, courseDto);
+
+    if (!updateCourse) {
+      throw new NotFoundException("The object does not exist!");
+    }
+    return res.status(HttpStatus.OK).json(updateCourse);
+  }
+
   @Delete("/delete")
   @HttpCode(200)
   @ApiOperation({ summary: "Delete the object."})

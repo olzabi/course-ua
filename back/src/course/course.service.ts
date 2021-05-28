@@ -90,4 +90,28 @@ export class CourseService {
       .execute();
     return deleteQuery;
   }
+
+  async updateCourse(courseId, courseDto: CourseDto) {
+    const updateQuery = this.courseRepo
+      .createQueryBuilder("course")
+      .update(CourseEntity)
+      .set({
+        name: courseDto.name,
+        description: courseDto.description,
+        rate: courseDto.rate,
+        price: courseDto.price,
+        link: courseDto.link,
+        pictureUrl: courseDto.pictureUrl
+      })
+      .where("id = :id", courseId)
+      .execute();
+
+    return updateQuery;
+  }
 }
+/* async updateStreamer(streamerID: string, createStreamerDTO: CreateStreamerDTO): Promise<Streamer> {
+        const updatedStreamer = await this.streamerModel
+          .findByIdAndUpdate(streamerID, createStreamerDTO, {new: true});
+
+        return updatedStreamer;
+    }*/
